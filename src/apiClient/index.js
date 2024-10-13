@@ -2,13 +2,13 @@ import axios from "axios";
 
 import AsyncStorage from "../lib/AsyncStorage";
 
-import AsyncStorageConstants from "../helper/AsyncStorage";
+import AsyncStorageConstants from ".././helper/AsyncStorage";
 
 import { navigate } from "../lib/RootNavigation";
 
 import Network from "../lib/NetworkStatus";
 
-import AlertMessage from "../helper/AlertMessage";
+import AlertMessage from ".././helper/AlertMessage";
 
 import Alert from "../lib/Alert";
 
@@ -41,7 +41,7 @@ class apiClient {
 
       if (statusCode == Network.FORBIDDEN) {
         errorMessage = JSON.parse(errorRequest.response).message;
-        alert(errorMessage);
+        Alert(errorMessage);
       }
 
 

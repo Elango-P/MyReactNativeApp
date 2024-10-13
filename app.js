@@ -3,10 +3,10 @@ import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {View, Text, StyleSheet} from 'react-native';
-import LoginScreen from './src/Views/Login.js/index.js';
-import ForgotPasswordScreen from './src/Views/ForgetPassword/ForgotPassword.js';
-import ResetPasswordScreen from './src/Views/ForgetPassword/ResetPassword.js';
-import HomeScreen from './src/Views/Home/HomeScreen.js';
+import LoginScreen from './src/views/LoginScreenjs/index.js';
+import ForgotPasswordScreen from './src/views/ForgetPassword/ForgotPassword.js';
+import ResetPasswordScreen from './src/views/ForgetPassword/ResetPassword.js';
+import HomeScreen from './src/views/Home/HomeScreen.js';
 
 
 const App = () => {
