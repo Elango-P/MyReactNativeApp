@@ -7,6 +7,7 @@ import LoginScreen from './src/views/LoginScreenjs/index.js';
 import ForgotPasswordScreen from './src/views/ForgetPassword/ForgotPassword.js';
 import ResetPasswordScreen from './src/views/ForgetPassword/ResetPassword.js';
 import HomeScreen from './src/views/Home/HomeScreen.js';
+import Purchase from './src/views/Purchase/index.js';
 
 
 const App = () => {
@@ -24,6 +25,7 @@ const App = () => {
             options={{headerShown: false}} 
           />
           <Stack.Screen name="ResetPassword" component={ResetPasswordScreen}  options={{headerShown: false}} />
+          <Stack.Screen name="Purchase" component={Purchase} />
 
 
         </Stack.Navigator>

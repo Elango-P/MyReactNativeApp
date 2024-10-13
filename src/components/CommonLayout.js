@@ -1,14 +1,13 @@
 import React from 'react';
 import {
   View,
-  Text, // Importing Text from react-native
+  Text,
   TouchableOpacity,
   StyleSheet,
   Image,
   Dimensions,
 } from 'react-native';
 
-// Get screen width to adjust icon size dynamically
 const screenWidth = Dimensions.get('window').width;
 
 const CommonLayout = ({children, onAddPress, title, onUserIconPress}) => {
@@ -16,14 +15,16 @@ const CommonLayout = ({children, onAddPress, title, onUserIconPress}) => {
     <View style={styles.container}>
       {/* Header Section */}
       <View style={styles.header}>
+        {onUserIconPress && 
         <TouchableOpacity
           style={styles.userIconContainer}
           onPress={onUserIconPress}>
           <Image
-            source={require('../../assets/loginimage.jpg')} // Replace with the actual path to your icon
+            source={require('../../assets/loginimage.jpg')}
             style={styles.userIcon}
           />
         </TouchableOpacity>
+}
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity style={styles.addButton} onPress={onAddPress}>
           <Text style={styles.addButtonText}>Add</Text>
@@ -33,11 +34,10 @@ const CommonLayout = ({children, onAddPress, title, onUserIconPress}) => {
       {/* Content Section */}
       <View style={styles.content}>
         {React.Children.map(children, (child) => {
-          // Wrap string children in a Text component to avoid errors
           return typeof child === 'string' ? (
-            <Text>{child}</Text> // Correctly wrapping string children in Text
+            <Text>{child}</Text>
           ) : (
-            child // Return other children as they are
+            child
           );
         })}
       </View>
@@ -89,11 +89,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 60, // Adjust height as needed
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 10,
     backgroundColor: '#007BFF',
+    zIndex: 1, // Ensures the header is above the content
   },
   userIconContainer: {
     marginRight: 10,
@@ -122,22 +128,28 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: 20,
+    paddingTop: 70, // Adjust padding to avoid content being hidden under the header
   },
-  // Bottom Icons Section
   bottomIcons: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 60, // Adjust height as needed
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingVertical: 10,
     backgroundColor: '#007BFF',
+    zIndex: 1, // Ensures the bottom icons are above the content
   },
   iconContainer: {
     alignItems: 'center',
-    width: screenWidth * 0.2, 
+    width: screenWidth * 0.2,
   },
   icon: {
-    width: 30, 
-    height: 30, 
+    width: 30,
+    height: 30,
   },
   iconLabel: {
     color: '#fff',

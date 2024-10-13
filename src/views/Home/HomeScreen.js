@@ -46,8 +46,11 @@ const HomeScreen = () => {
             <TouchableOpacity style={styles.featureButton}>
               <Text style={styles.featureButtonText}>Accounts</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.featureButton}>
+            <TouchableOpacity style={styles.featureButton} onPress={() => navigation.navigate('Purchase')} >
               <Text style={styles.featureButtonText}>Purchase</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.featureButton}>
+              <Text style={styles.featureButtonText}>Bills</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.featureButton}>
               <Text style={styles.featureButtonText}>Product</Text>

@@ -4,7 +4,6 @@ import Constants from 'expo-constants';
 
 import { Platform, NativeModules } from "react-native";
 
-import * as Battery from 'expo-battery';
 
 import * as Location from 'expo-location';
 import UserDeviceInfo from "../helper/UserDeviceInfo";
@@ -95,17 +94,7 @@ class Device {
     return ""
   }
 
-  async GetBatteryPercentage(callback) {
-
-    Battery.getBatteryLevelAsync().then(batteryLevel => {
-
-      const roundedBatteryLevel = Math.round(batteryLevel * 100);
-
-      callback && callback(roundedBatteryLevel);
-
-    });
-
-  }
+  
   async getUniqueId() {
     if (DeviceInfo) {
       let id = await DeviceInfo.getBuildId()
