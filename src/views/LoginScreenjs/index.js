@@ -11,9 +11,6 @@ import {
 import Validation from '../../lib/Validation';
 import Alert from '../../components/Modal/Alert';
 import AppID from '../../lib/AppID';
-import * as device from 'expo-device';
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
 import apiClient from '../../apiClient';
 import {endpoints} from '../../helper/ApiEndPoint';
 import asyncStorageService from '../../services/AsyncStorageService';
@@ -25,7 +22,6 @@ import AsyncStorageObject from '../../lib/AsyncStorage';
 import onePortalDB from '../../db/onePortalDB';
 import storeService from '../../services/StoreService';
 
-const expoProjectId = Constants?.expoConfig?.extra?.eas?.projectId;
 let DeviceInfo;
 
 const LoginScreen = ({navigation}) => {
@@ -38,42 +34,25 @@ const LoginScreen = ({navigation}) => {
   );
   const [appVersion, setAppVersion] = useState('');
 
-  useEffect(() => {
-    const registerForPushNotifications = async () => {
-      if (device.isDevice) {
-        const {status} = await Notifications.requestPermissionsAsync();
-        if (status !== 'granted') {
-          Alert.Error('You need to enable notifications in your settings.');
-          return;
-        }
-        const token = (
-          await Notifications.getExpoPushTokenAsync({projectId: expoProjectId})
-        ).data;
-        setPushNotificationToken(token);
-      }
-    };
-
-    registerForPushNotifications();
-
-    const subscription = Notifications.addNotificationReceivedListener(
-      notification => {},
-    );
-
-    return () => subscription.remove();
-  }, []);
+ 
+  
   const LogInRedirection = async response => {
     try {
       let role = response?.data?.user ? response.data.user.role.toString() : '';
+      console.log("------------------------>>>>>>>> ~ role:", role)
 
       let userId = response?.data?.user ? response.data.user.id.toString() : '';
+      console.log("------------------------>>>>>>>> ~ userId:", userId)
 
       let locationList = response?.data?.user
-        ? response?.data?.user.locationList
-        : [];
+      ? response?.data?.user.locationList
+      : [];
+      console.log("------------------------>>>>>>>> ~ locationList:", locationList)
 
       let permissionList = response?.data?.user
-        ? response?.data?.user.permissionList
-        : [];
+      ? response?.data?.user.permissionList
+      : [];
+      console.log("------------------------>>>>>>>> ~ permissionList:", permissionList)
 
       let settingList = response?.data?.user
         ? response?.data?.user.settingList
@@ -138,6 +117,8 @@ const LoginScreen = ({navigation}) => {
       }
 
       await onePortalDB.create();
+
+      navigation.navigate('Home', {login: true});
 
       if (AppID.isZunoMartStore() || AppID.isThiDiff() || AppID.isZunoStar()) {
         if (locationList && locationList.length == 1) {
@@ -208,7 +189,6 @@ const LoginScreen = ({navigation}) => {
           setPassword('');
           setEmail('');
         }
-        navigation.navigate('Home', {login: true});
       }
     } catch (err) {
       console.log(err);
@@ -220,6 +200,7 @@ const LoginScreen = ({navigation}) => {
 
     let params = {user: userId};
     await userDeviceInfoService.search(params, async (err, response) => {
+      console.log("------------------------>>>>>>>> ~ response:", response)
       if (response.data?.data[0].reset_mobile_data === 'true') {
         AsyncStorageObject.clearAll({
           isClearAll: true,
@@ -263,11 +244,12 @@ const LoginScreen = ({navigation}) => {
             email: email.toLowerCase(),
             password: password,
             isMobileLogin: true,
-            appVersion: version,
+            // appVersion: version,
             isCustomerApp: AppID.isZunoMart() ? true : false,
             nameSpace: 'com.zunostar',
             pushNotificationToken: pushNotificationToken,
           };
+          console.log("------------------------>>>>>>>> ~ data:", data)
 
           apiClient.post(
             `${endpoints().UserAPI}/mobileLogin`,

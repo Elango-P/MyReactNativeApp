@@ -23,52 +23,51 @@ class onePortalDB {
     
 
     static async create() {
-        console.log("dddddddddddddddddddd--------------111111111111----------->>>>>>>>>>>>>>>>>>>>>>>>>>");
         
         
-        // await OnePortalDB.runQuery(OnePortalDB.DB, "DROP TABLE product_index");
+        await OnePortalDB.dropTableIfExists("product_index");
 
-        // await OnePortalDB.runQuery(OnePortalDB.DB, "DROP TABLE status");
+        await OnePortalDB.dropTableIfExists("status");
 
-        // await OnePortalDB.runQuery(OnePortalDB.DB, "DROP TABLE product_price");
+        await OnePortalDB.dropTableIfExists("product_price");
 
-        await OnePortalDB.runQuery(OnePortalDB.DB, "DROP TABLE order_type");
+        await OnePortalDB.dropTableIfExists("order_type");
 
 
         try {
 
             // //create product index table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, ProductIndexSQLQuery.CREATE_PRODUCT_INDEX_TABLE);
+            await OnePortalDB.runQuery(ProductIndexSQLQuery.CREATE_PRODUCT_INDEX_TABLE);
 
             // //create transfer table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, transferSQLQuery.CREATE_TRANSFER_TABLE);
+            await OnePortalDB.runQuery(transferSQLQuery.CREATE_TRANSFER_TABLE);
 
             // //create transfer table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, transferProductSQLQuery.CREATE_TRANSFER_PRODUCT_TABLE);
+            await OnePortalDB.runQuery(transferProductSQLQuery.CREATE_TRANSFER_PRODUCT_TABLE);
 
             // //create stock entry
-            // await OnePortalDB.runQuery(OnePortalDB.DB, stockEntrySQLQuery.CREATE_STOCK_ENTRY_TABLE);
+            await OnePortalDB.runQuery(stockEntrySQLQuery.CREATE_STOCK_ENTRY_TABLE);
 
             // //create stock entry product
-            // await OnePortalDB.runQuery(OnePortalDB.DB, stockEntryProductSQLQuery.CREATE_STOCK_ENTRY_PRODUCT_TABLE);
+            await OnePortalDB.runQuery(stockEntryProductSQLQuery.CREATE_STOCK_ENTRY_PRODUCT_TABLE);
 
             // //create order table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, orderSQLQuery.CREATE_ORDER_TABLE);
+            await OnePortalDB.runQuery(orderSQLQuery.CREATE_ORDER_TABLE);
 
             // //create order product table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, orderProductSQLQuery.CREATE_ORDER_PRODUCT_TABLE);
+            await OnePortalDB.runQuery(orderProductSQLQuery.CREATE_ORDER_PRODUCT_TABLE);
 
             // //create order product table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, BluetoothSetting.CREATE_SETTINGS_TABLE);
+            await OnePortalDB.runQuery(BluetoothSetting.CREATE_SETTINGS_TABLE);
 
             // //create product price table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, ProductPrice.CREATE_PRODUCT_PRICE_TABLE);
+            await OnePortalDB.runQuery(ProductPrice.CREATE_PRODUCT_PRICE_TABLE);
             
             // //create status table
-            // await OnePortalDB.runQuery(OnePortalDB.DB, Status.CREATE_PRODUCT_STATUS_TABLE);
+            await OnePortalDB.runQuery(Status.CREATE_PRODUCT_STATUS_TABLE);
 
              //create Order Type table
-             await OnePortalDB.runQuery(OnePortalDB.DB, OrderType.CREATE_ORDER_TYPE_TABLE);
+             await OnePortalDB.runQuery(OrderType.CREATE_ORDER_TYPE_TABLE);
 
 
         } catch (err) {
